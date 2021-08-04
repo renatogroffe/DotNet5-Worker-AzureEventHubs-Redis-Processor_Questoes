@@ -1,0 +1,14 @@
+{
+    "redisXplorer.config": {
+        "profiles": [
+            {
+                "name": "RedisAzure",
+                "host": "groffecache.redis.cache.windows.net",
+                "accessKey": "xtiGSSqljNOXeNhwMhrzYINNhl9TAXoYCKDJUNo9ROY=",
+                "filter": "*",
+                "port": "6380"
+            }
+        ],
+        "scanLimit": 200
+    }
+}
