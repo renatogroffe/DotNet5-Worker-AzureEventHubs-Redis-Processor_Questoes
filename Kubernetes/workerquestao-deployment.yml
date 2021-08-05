@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: workerquestao
+spec:
+  selector:
+    matchLabels:
+      app: workerquestao
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: workerquestao
+    spec:
+      containers:
+      - name: workerquestao
+        image: renatogroffe/workereventhubquestao:3
+        env:
+        - name: AzureEventHubs__EventHub
+          value: votacao
+        - name: AzureEventHubs__ConsumerGroup
+          value: grofferedis
+        - name: AzureEventHubs__BlobContainer
+          value: hubvotacao
+        - name: AzureEventHubs__EventHubsConnectionString
+          valueFrom:
+            secretKeyRef:
+              name: workerquestaosecret
+              key: ConnectionAzureEventHubs
+        - name: AzureEventHubs__BlobStorageConnectionString
+          valueFrom:
+            secretKeyRef:
+              name: workerquestaosecret
+              key: ConnectionAzureStorage
+        - name: ConnectionStrings__Redis
+          valueFrom:
+            secretKeyRef:
+              name: workerquestaosecret
+              key: ConnectionRedis
